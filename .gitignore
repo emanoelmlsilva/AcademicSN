@@ -28,3 +28,20 @@ hs_err_pid*
 
 # End of https://www.toptal.com/developers/gitignore/api/java
 
+### VS Code ###
+.vscode/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
