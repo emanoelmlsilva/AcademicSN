@@ -19,10 +19,10 @@ public class Disciplina implements Comparable<Disciplina>, Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    String nome;
-    Double nota;
-    String comentario;
-    int likes;
+    private String nome;
+    private Double nota;
+    private String comentario;
+    private int likes;
 
     public Disciplina() {
     }
@@ -49,6 +49,22 @@ public class Disciplina implements Comparable<Disciplina>, Serializable {
 
     public void setNota(Double nota) {
         this.nota = nota;
+    }
+
+    public String getComentario() {
+        return comentario;
+    }
+
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
+    }
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
     }
 
     @Override
