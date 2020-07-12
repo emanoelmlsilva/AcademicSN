@@ -1,27 +1,28 @@
 package com.network_social.academic.models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Disciplina implements Comparable<Disciplina> {
 
-    int id;
+    @Id
+    @GeneratedValue
+    Long id;
     String nome;
     Double nota;
+    String comentario;
+    int likes;
 
     public Disciplina() {
-        id = -1;
-        nome = null;
-        nota = 0.0;
     }
 
-    public Disciplina(String nome, Double nota) {
-        this.nome = nome;
-        this.nota = nota;
-    }
-
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -45,7 +46,7 @@ public class Disciplina implements Comparable<Disciplina> {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + id;
+        result = (int) (prime * result + id);
         return result;
     }
 
