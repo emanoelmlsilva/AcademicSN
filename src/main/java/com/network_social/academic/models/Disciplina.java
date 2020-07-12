@@ -7,7 +7,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import lombok.AllArgsConstructor;
+
 @Entity
+@AllArgsConstructor
 public class Disciplina implements Comparable<Disciplina>, Serializable {
 
     private static final long serialVersionUID = 1L;
