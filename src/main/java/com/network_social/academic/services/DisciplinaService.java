@@ -6,12 +6,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.network_social.academic.dtos.DisciplinaBaseDTO;
 import com.network_social.academic.models.Disciplina;
 import com.network_social.academic.repositories.DisciplinaRepository;
 
@@ -60,8 +62,8 @@ public class DisciplinaService {
 
     }
 
-    public List<Disciplina> findAll() {
-        return disciplinaRepository.findAll();
+    public List<DisciplinaBaseDTO> findAll() {
+        return fromToBaseDisciplina(disciplinaRepository.findAll());
     }
 
     // public Disciplina insert(Disciplina disciplina) {
@@ -87,4 +89,8 @@ public class DisciplinaService {
     // findById(id);
     // return disciplinas.remove(id);
     // }
+
+    public List<DisciplinaBaseDTO> fromToBaseDisciplina(List<Disciplina> discilinas) {
+        return discilinas.stream().map(disciplina -> new DisciplinaBaseDTO(disciplina)).collect(Collectors.toList());
+    }
 }
