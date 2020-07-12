@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import com.network_social.academic.dtos.DisciplinaBaseDTO;
 import com.network_social.academic.models.Disciplina;
 import com.network_social.academic.services.DisciplinaService;
 
@@ -28,56 +29,65 @@ public class DisciplinaController {
     @Autowired
     private DisciplinaService disciplinaService;
 
-    @GetMapping
-    public ResponseEntity<List<Disciplina>> findAll() {
-        return new ResponseEntity<List<Disciplina>>(disciplinaService.findAll(), HttpStatus.OK);
+    @GetMapping("")
+    public ResponseEntity<List<DisciplinaBaseDTO>> findAll() {
+        return new ResponseEntity<List<DisciplinaBaseDTO>>(disciplinaService.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Disciplina> findById(@PathVariable int id) {
-        try {
-            return new ResponseEntity<Disciplina>(disciplinaService.findById(id), HttpStatus.OK);
-        } catch (ArrayIndexOutOfBoundsException error) {
-            return new ResponseEntity<Disciplina>(new Disciplina(), HttpStatus.NOT_FOUND);
-        }
+    // @GetMapping("/{id}")
+    // public ResponseEntity<Disciplina> findById(@PathVariable int id) {
+    // try {
+    // return new ResponseEntity<Disciplina>(disciplinaService.findById(id),
+    // HttpStatus.OK);
+    // } catch (ArrayIndexOutOfBoundsException error) {
+    // return new ResponseEntity<Disciplina>(new Disciplina(),
+    // HttpStatus.NOT_FOUND);
+    // }
 
-    }
+    // }
 
-    @GetMapping("/ranking")
-    public ResponseEntity<List<Disciplina>> findAllRanking() {
+    // @GetMapping("/ranking")
+    // public ResponseEntity<List<Disciplina>> findAllRanking() {
 
-        List<Disciplina> novaLista = disciplinaService.findAll();
+    // List<Disciplina> novaLista = disciplinaService.findAll();
 
-        Collections.sort(novaLista);
-        Collections.reverse(novaLista);
-        return new ResponseEntity<List<Disciplina>>(novaLista, HttpStatus.OK);
+    // Collections.sort(novaLista);
+    // Collections.reverse(novaLista);
+    // return new ResponseEntity<List<Disciplina>>(novaLista, HttpStatus.OK);
 
-    }
+    // }
 
-    @PostMapping
-    public ResponseEntity<Disciplina> insert(@Valid @RequestBody Disciplina disciplina) {
-        return new ResponseEntity<Disciplina>(disciplinaService.insert(disciplina), HttpStatus.OK);
-    }
+    // @PostMapping
+    // public ResponseEntity<Disciplina> insert(@Valid @RequestBody Disciplina
+    // disciplina) {
+    // return new ResponseEntity<Disciplina>(disciplinaService.insert(disciplina),
+    // HttpStatus.OK);
+    // }
 
-    @PutMapping("/{id}/nome")
-    public ResponseEntity<Disciplina> update(@PathVariable int id, @Valid @RequestBody Disciplina disciplina) {
+    // @PutMapping("/{id}/nome")
+    // public ResponseEntity<Disciplina> update(@PathVariable int id, @Valid
+    // @RequestBody Disciplina disciplina) {
 
-        try {
-            return new ResponseEntity<Disciplina>(disciplinaService.update(disciplina), HttpStatus.OK);
-        } catch (ArrayIndexOutOfBoundsException error) {
-            return new ResponseEntity<Disciplina>(new Disciplina(), HttpStatus.NOT_FOUND);
+    // try {
+    // return new ResponseEntity<Disciplina>(disciplinaService.update(disciplina),
+    // HttpStatus.OK);
+    // } catch (ArrayIndexOutOfBoundsException error) {
+    // return new ResponseEntity<Disciplina>(new Disciplina(),
+    // HttpStatus.NOT_FOUND);
 
-        }
+    // }
 
-    }
+    // }
 
-    @DeleteMapping("{id}")
-    public ResponseEntity<Disciplina> delete(@PathVariable int id) {
-        try {
-            return new ResponseEntity<Disciplina>(disciplinaService.delete(id), HttpStatus.OK);
-        } catch (ArrayIndexOutOfBoundsException error) {
-            return new ResponseEntity<Disciplina>(new Disciplina(), HttpStatus.NOT_FOUND);
-        }
-    }
+    // @DeleteMapping("{id}")
+    // public ResponseEntity<Disciplina> delete(@PathVariable int id) {
+    // try {
+    // return new ResponseEntity<Disciplina>(disciplinaService.delete(id),
+    // HttpStatus.OK);
+    // } catch (ArrayIndexOutOfBoundsException error) {
+    // return new ResponseEntity<Disciplina>(new Disciplina(),
+    // HttpStatus.NOT_FOUND);
+    // }
+    // }
 
 }
