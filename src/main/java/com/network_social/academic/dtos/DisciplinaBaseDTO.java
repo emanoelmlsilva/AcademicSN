@@ -8,7 +8,7 @@ public class DisciplinaBaseDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    Long id;
+    private Long id;
     private String nome;
 
     public DisciplinaBaseDTO(Disciplina disciplina) {
