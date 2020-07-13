@@ -16,6 +16,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.network_social.academic.dtos.DisciplinaBaseDTO;
 import com.network_social.academic.dtos.DisciplinaBaseLikesDTO;
+import com.network_social.academic.dtos.DisciplinaBaseNotaDTO;
 import com.network_social.academic.models.Disciplina;
 import com.network_social.academic.repositories.DisciplinaRepository;
 
@@ -85,6 +86,17 @@ public class DisciplinaService {
 
     }
 
+    public DisciplinaBaseNotaDTO updateNota(Long id, Double nota) throws NoSuchElementException {
+        Optional<Disciplina> newDisciplina = findById(id);
+        if (newDisciplina.get().getNota() == null) {
+            newDisciplina.get().setNota(nota);
+        } else {
+            Double media = (newDisciplina.get().getNota() + nota) / 2;
+            newDisciplina.get().setNota(media);
+        }
+        return fromToBaseNotaDisciplina(this.disciplinaRepository.save(newDisciplina.get()));
+    }
+
     // public Disciplina delete(int id) throws ArrayIndexOutOfBoundsException {
     // findById(id);
     // return disciplinas.remove(id);
@@ -96,6 +108,10 @@ public class DisciplinaService {
 
     public DisciplinaBaseLikesDTO fromToBaseLikesDisciplina(Disciplina disciplina) {
         return new DisciplinaBaseLikesDTO(disciplina);
+    }
+
+    public DisciplinaBaseNotaDTO fromToBaseNotaDisciplina(Disciplina disciplina) {
+        return new DisciplinaBaseNotaDTO(disciplina);
     }
 
 }

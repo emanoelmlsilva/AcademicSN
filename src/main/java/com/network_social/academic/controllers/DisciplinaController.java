@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import com.network_social.academic.dtos.DisciplinaBaseDTO;
 import com.network_social.academic.dtos.DisciplinaBaseLikesDTO;
+import com.network_social.academic.dtos.DisciplinaBaseNotaDTO;
 import com.network_social.academic.models.Disciplina;
 import com.network_social.academic.services.DisciplinaService;
 
@@ -52,6 +53,17 @@ public class DisciplinaController {
             return new ResponseEntity<DisciplinaBaseLikesDTO>(disciplinaService.updateLikes(id), HttpStatus.OK);
         } catch (NoSuchElementException error) {
             return new ResponseEntity<DisciplinaBaseLikesDTO>(new DisciplinaBaseLikesDTO(), HttpStatus.NOT_FOUND);
+        }
+
+    }
+
+    @PutMapping("/nota/{id}")
+    public ResponseEntity<DisciplinaBaseNotaDTO> updateNota(@PathVariable Long id,
+            @RequestParam(required = true) Double nota) {
+        try {
+            return new ResponseEntity<DisciplinaBaseNotaDTO>(disciplinaService.updateNota(id, nota), HttpStatus.OK);
+        } catch (NoSuchElementException error) {
+            return new ResponseEntity<DisciplinaBaseNotaDTO>(new DisciplinaBaseNotaDTO(), HttpStatus.NOT_FOUND);
         }
 
     }
