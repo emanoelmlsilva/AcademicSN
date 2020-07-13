@@ -7,6 +7,7 @@ import java.util.NoSuchElementException;
 import javax.validation.Valid;
 
 import com.network_social.academic.dtos.DisciplinaBaseDTO;
+import com.network_social.academic.dtos.DisciplinaBaseLikesDTO;
 import com.network_social.academic.models.Disciplina;
 import com.network_social.academic.services.DisciplinaService;
 
@@ -41,6 +42,16 @@ public class DisciplinaController {
             return new ResponseEntity<Disciplina>(disciplinaService.findById(id).get(), HttpStatus.OK);
         } catch (NoSuchElementException error) {
             return new ResponseEntity<Disciplina>(new Disciplina(), HttpStatus.NOT_FOUND);
+        }
+
+    }
+
+    @PutMapping("/likes/{id}")
+    public ResponseEntity<DisciplinaBaseLikesDTO> updateLikes(@PathVariable Long id) {
+        try {
+            return new ResponseEntity<DisciplinaBaseLikesDTO>(disciplinaService.updateLikes(id), HttpStatus.OK);
+        } catch (NoSuchElementException error) {
+            return new ResponseEntity<DisciplinaBaseLikesDTO>(new DisciplinaBaseLikesDTO(), HttpStatus.NOT_FOUND);
         }
 
     }

@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -14,6 +15,7 @@ import javax.annotation.PostConstruct;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.network_social.academic.dtos.DisciplinaBaseDTO;
+import com.network_social.academic.dtos.DisciplinaBaseLikesDTO;
 import com.network_social.academic.models.Disciplina;
 import com.network_social.academic.repositories.DisciplinaRepository;
 
@@ -76,20 +78,24 @@ public class DisciplinaService {
     // return disciplina;
     // }
 
-    // public Disciplina update(Disciplina disciplina) throws
-    // ArrayIndexOutOfBoundsException {
-    // findById(disciplina.getId());
-    // disciplinas.set(disciplina.getId(), disciplina);
-    // return disciplina;
+    public DisciplinaBaseLikesDTO updateLikes(Long id) throws NoSuchElementException {
+        Optional<Disciplina> newDisciplina = findById(id);
+        newDisciplina.get().setLikes(newDisciplina.get().getLikes() + 1);
+        return fromToBaseLikesDisciplina(this.disciplinaRepository.save(newDisciplina.get()));
 
-    // }
+    }
 
     // public Disciplina delete(int id) throws ArrayIndexOutOfBoundsException {
     // findById(id);
     // return disciplinas.remove(id);
     // }
 
-    public List<DisciplinaBaseDTO> fromToBaseDisciplina(List<Disciplina> discilinas) {
-        return discilinas.stream().map(disciplina -> new DisciplinaBaseDTO(disciplina)).collect(Collectors.toList());
+    public List<DisciplinaBaseDTO> fromToBaseDisciplina(List<Disciplina> disciplinas) {
+        return disciplinas.stream().map(disciplina -> new DisciplinaBaseDTO(disciplina)).collect(Collectors.toList());
     }
+
+    public DisciplinaBaseLikesDTO fromToBaseLikesDisciplina(Disciplina disciplina) {
+        return new DisciplinaBaseLikesDTO(disciplina);
+    }
+
 }
