@@ -12,6 +12,9 @@ public class DisciplinaBaseNotaDTO implements Serializable {
     private String nome;
     private Double nota;
 
+    public DisciplinaBaseNotaDTO() {
+    }
+
     public DisciplinaBaseNotaDTO(Disciplina disciplina) {
         this.id = disciplina.getId();
         this.nome = disciplina.getNome();
