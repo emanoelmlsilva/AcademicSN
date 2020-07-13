@@ -2,6 +2,7 @@ package com.network_social.academic.controllers;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import javax.validation.Valid;
 
@@ -34,17 +35,15 @@ public class DisciplinaController {
         return new ResponseEntity<List<DisciplinaBaseDTO>>(disciplinaService.findAll(), HttpStatus.OK);
     }
 
-    // @GetMapping("/{id}")
-    // public ResponseEntity<Disciplina> findById(@PathVariable int id) {
-    // try {
-    // return new ResponseEntity<Disciplina>(disciplinaService.findById(id),
-    // HttpStatus.OK);
-    // } catch (ArrayIndexOutOfBoundsException error) {
-    // return new ResponseEntity<Disciplina>(new Disciplina(),
-    // HttpStatus.NOT_FOUND);
-    // }
+    @GetMapping("/{id}")
+    public ResponseEntity<Disciplina> findById(@PathVariable Long id) {
+        try {
+            return new ResponseEntity<Disciplina>(disciplinaService.findById(id).get(), HttpStatus.OK);
+        } catch (NoSuchElementException error) {
+            return new ResponseEntity<Disciplina>(new Disciplina(), HttpStatus.NOT_FOUND);
+        }
 
-    // }
+    }
 
     // @GetMapping("/ranking")
     // public ResponseEntity<List<Disciplina>> findAllRanking() {
