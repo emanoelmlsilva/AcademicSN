@@ -66,14 +66,13 @@ public class DisciplinaService {
         return fromToBaseDisciplina(disciplinaRepository.findAll());
     }
 
+    public Optional<Disciplina> findById(Long id) {
+        return disciplinaRepository.findById(id);
+    }
+
     // public Disciplina insert(Disciplina disciplina) {
     // disciplina.setId(null);
     // disciplinaRepository.save(disciplina);
-    // return disciplina;
-    // }
-
-    // public Disciplina findById(Long id) {
-    // Optional<Disciplina> disciplina = disciplinaRepository.findById(id);
     // return disciplina;
     // }
 
