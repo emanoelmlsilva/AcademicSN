@@ -12,6 +12,9 @@ public class DisciplinaBaseComentarioDTO implements Serializable {
     private String nome;
     private String comentario;
 
+    public DisciplinaBaseComentarioDTO() {
+    }
+
     public DisciplinaBaseComentarioDTO(Disciplina disciplina) {
         this.id = disciplina.getId();
         this.nome = disciplina.getNome();
