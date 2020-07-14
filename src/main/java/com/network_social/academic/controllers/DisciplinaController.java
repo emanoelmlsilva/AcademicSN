@@ -6,6 +6,7 @@ import java.util.NoSuchElementException;
 
 import javax.validation.Valid;
 
+import com.network_social.academic.dtos.DisciplinaBaseComentarioDTO;
 import com.network_social.academic.dtos.DisciplinaBaseDTO;
 import com.network_social.academic.dtos.DisciplinaBaseLikesDTO;
 import com.network_social.academic.dtos.DisciplinaBaseNotaDTO;
@@ -64,6 +65,19 @@ public class DisciplinaController {
             return new ResponseEntity<DisciplinaBaseNotaDTO>(disciplinaService.updateNota(id, nota), HttpStatus.OK);
         } catch (NoSuchElementException error) {
             return new ResponseEntity<DisciplinaBaseNotaDTO>(new DisciplinaBaseNotaDTO(), HttpStatus.NOT_FOUND);
+        }
+
+    }
+
+    @PutMapping("/comentarios/{id}")
+    public ResponseEntity<DisciplinaBaseComentarioDTO> updateComentario(@PathVariable Long id,
+            @RequestParam(required = true) String comentario) {
+        try {
+            return new ResponseEntity<DisciplinaBaseComentarioDTO>(disciplinaService.updateComentario(id, comentario),
+                    HttpStatus.OK);
+        } catch (NoSuchElementException error) {
+            return new ResponseEntity<DisciplinaBaseComentarioDTO>(new DisciplinaBaseComentarioDTO(),
+                    HttpStatus.NOT_FOUND);
         }
 
     }

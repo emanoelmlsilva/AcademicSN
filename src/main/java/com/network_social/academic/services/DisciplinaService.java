@@ -14,6 +14,7 @@ import javax.annotation.PostConstruct;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.network_social.academic.dtos.DisciplinaBaseComentarioDTO;
 import com.network_social.academic.dtos.DisciplinaBaseDTO;
 import com.network_social.academic.dtos.DisciplinaBaseLikesDTO;
 import com.network_social.academic.dtos.DisciplinaBaseNotaDTO;
@@ -43,15 +44,11 @@ public class DisciplinaService {
             List<Disciplina> disciplinas = mapper.readValue(inputStream, typeReference);
 
             List<Disciplina> bdDisciplinas = this.disciplinaRepository.findAll();
-            System.out.println("bdDisciplinas " + bdDisciplinas.size());
 
             if (bdDisciplinas.size() > 0) {
 
-                List<Disciplina> newList = disciplinas.stream()
-                        .filter(bdDisciplina -> bdDisciplinas.stream()
-                                .anyMatch(disciplina -> !disciplina.getNome().equals(bdDisciplina.getNome())))
-                        .collect(Collectors.toList());
-                disciplinas = newList;
+                disciplinas.removeAll(bdDisciplinas);
+
             }
 
             this.disciplinaRepository.saveAll(disciplinas);
@@ -97,6 +94,19 @@ public class DisciplinaService {
         return fromToBaseNotaDisciplina(this.disciplinaRepository.save(newDisciplina.get()));
     }
 
+    public DisciplinaBaseComentarioDTO updateComentario(Long id, String comentario) throws NoSuchElementException {
+        Optional<Disciplina> newDisciplina = findById(id);
+        if (newDisciplina.get().getComentario() == null || newDisciplina.get().getComentario().equals("")) {
+            newDisciplina.get().setComentario(comentario);
+        } else {
+            String concatenarComentario = newDisciplina.get().getComentario() + " , " + comentario;
+            newDisciplina.get().setComentario(concatenarComentario);
+        }
+
+        return fromToBaseComentarioDisciplina(this.disciplinaRepository.save(newDisciplina.get()));
+
+    }
+
     // public Disciplina delete(int id) throws ArrayIndexOutOfBoundsException {
     // findById(id);
     // return disciplinas.remove(id);
@@ -112,6 +122,10 @@ public class DisciplinaService {
 
     public DisciplinaBaseNotaDTO fromToBaseNotaDisciplina(Disciplina disciplina) {
         return new DisciplinaBaseNotaDTO(disciplina);
+    }
+
+    public DisciplinaBaseComentarioDTO fromToBaseComentarioDisciplina(Disciplina disciplina) {
+        return new DisciplinaBaseComentarioDTO(disciplina);
     }
 
 }
