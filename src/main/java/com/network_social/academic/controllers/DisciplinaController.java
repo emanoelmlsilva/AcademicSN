@@ -38,6 +38,11 @@ public class DisciplinaController {
         return new ResponseEntity<List<DisciplinaBaseDTO>>(disciplinaService.findAll(), HttpStatus.OK);
     }
 
+    @GetMapping("/ranking/notas")
+    public ResponseEntity<List<DisciplinaBaseNotaDTO>> findAllByOrdeNota() {
+        return new ResponseEntity<List<DisciplinaBaseNotaDTO>>(disciplinaService.findAllByOrdeNota(), HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Disciplina> findById(@PathVariable Long id) {
         try {
