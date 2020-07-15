@@ -70,11 +70,9 @@ public class DisciplinaService {
         return disciplinaRepository.findById(id);
     }
 
-    // public Disciplina insert(Disciplina disciplina) {
-    // disciplina.setId(null);
-    // disciplinaRepository.save(disciplina);
-    // return disciplina;
-    // }
+    public List<DisciplinaBaseNotaDTO> findAllByOrdeNota() {
+        return disciplinaRepository.findByOrderByNotaAsc();
+    }
 
     public DisciplinaBaseLikesDTO updateLikes(Long id) throws NoSuchElementException {
         Optional<Disciplina> newDisciplina = findById(id);
@@ -106,11 +104,6 @@ public class DisciplinaService {
         return fromToBaseComentarioDisciplina(this.disciplinaRepository.save(newDisciplina.get()));
 
     }
-
-    // public Disciplina delete(int id) throws ArrayIndexOutOfBoundsException {
-    // findById(id);
-    // return disciplinas.remove(id);
-    // }
 
     public List<DisciplinaBaseDTO> fromToBaseDisciplina(List<Disciplina> disciplinas) {
         return disciplinas.stream().map(disciplina -> new DisciplinaBaseDTO(disciplina)).collect(Collectors.toList());
