@@ -43,6 +43,11 @@ public class DisciplinaController {
         return new ResponseEntity<List<DisciplinaBaseNotaDTO>>(disciplinaService.findAllByOrdeNota(), HttpStatus.OK);
     }
 
+    @GetMapping("/ranking/likes")
+    public ResponseEntity<List<DisciplinaBaseLikesDTO>> findAllByOrdDescLikes() {
+        return new ResponseEntity<List<DisciplinaBaseLikesDTO>>(disciplinaService.findAllByOrdeLikes(), HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Disciplina> findById(@PathVariable Long id) {
         try {

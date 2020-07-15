@@ -74,6 +74,10 @@ public class DisciplinaService {
         return disciplinaRepository.findByOrderByNotaAsc();
     }
 
+    public List<DisciplinaBaseLikesDTO> findAllByOrdeLikes() {
+        return disciplinaRepository.findByOrderByLikesDesc();
+    }
+
     public DisciplinaBaseLikesDTO updateLikes(Long id) throws NoSuchElementException {
         Optional<Disciplina> newDisciplina = findById(id);
         newDisciplina.get().setLikes(newDisciplina.get().getLikes() + 1);
