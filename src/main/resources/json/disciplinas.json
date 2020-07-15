@@ -11,21 +11,21 @@
     "nome": "jose",
     "nota": 5.0,
     "comentario": "o que esta acontecendo",
-    "likes": 10
+    "likes": 7
   },
   {
     "id": 2,
     "nome": "silva",
     "nota": 7.4,
     "comentario": "esta no caminho certo",
-    "likes": 10
+    "likes": 3
   },
   {
     "id": 3,
     "nome": "jhon",
     "nota": 6.7,
     "comentario": "você consegue",
-    "likes": 10
+    "likes": 8
   },
   {
     "id": 4,
